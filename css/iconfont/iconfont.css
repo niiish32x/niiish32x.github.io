@@ -1,0 +1,56 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3766736 */
+  src: url('iconfont.woff2?t=1668241458345') format('woff2'),
+       url('iconfont.woff?t=1668241458345') format('woff'),
+       url('iconfont.ttf?t=1668241458345') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 22px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-variant: normal;
+    display: var(--fa-display,inline-block);
+    line-height: 1;
+    text-rendering: auto;
+}
+
+.icon-youxiang:before {
+  content: "\e667";
+}
+
+.icon-QQ:before {
+  content: "\e882";
+}
+
+.icon-zhifubao:before {
+  content: "\e60a";
+}
+
+.icon-github:before {
+  content: "\e603";
+}
+
+.icon-weixin:before {
+  content: "\e600";
+}
+
+.icon-bilibili:before {
+  content: "\e609";
+}
+
+.icon-gmail:before {
+  content: "\e60b";
+}
+
+.icon-leetcode1:before {
+  content: "\ebf2";
+}
+
+.icon-leetcode:before {
+  content: "\e60d";
+}
+
