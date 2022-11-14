@@ -306,9 +306,9 @@
       
         <tags>
             
-            <tag> acwing </tag>
-            
             <tag> 算法笔试 </tag>
+            
+            <tag> acwing </tag>
             
         </tags>
       
@@ -840,6 +840,14 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> 算法模板 </tag>
+            
+            <tag> 循环队列 </tag>
+            
+        </tags>
       
     </entry>
     
