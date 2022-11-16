@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>leetcode775全局倒置与局部倒置</title>
+      <link href="/2022/11/16/leetcode775%E5%85%A8%E5%B1%80%E5%80%92%E7%BD%AE%E4%B8%8E%E5%B1%80%E9%83%A8%E5%80%92%E7%BD%AE/"/>
+      <url>/2022/11/16/leetcode775%E5%85%A8%E5%B1%80%E5%80%92%E7%BD%AE%E4%B8%8E%E5%B1%80%E9%83%A8%E5%80%92%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<h2 id="法1-推理"><a href="#法1-推理" class="headerlink" title="法1 推理"></a>法1 推理</h2><p>全局倒置 全局内 逆序的数对<br>局部倒置 相邻的逆序对<br>因此<strong>局部倒置 一定是 全局倒置</strong><br>即 全局倒置 &gt;&#x3D; 局部倒置<br>因此全局逆序对的产生方式 必须与局部逆序对相同<br>即 存在所有逆序对必须都是相邻逆序 如果不是相邻逆序 则为false</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line"><span class="keyword">if</span> a &gt; b &#123;</span><br><span class="line"><span class="keyword">return</span> a</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> b</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">isIdealPermutation</span><span class="params">(nums []<span class="type">int</span>)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">mx := nums[<span class="number">0</span>]</span><br><span class="line">    n := <span class="built_in">len</span>(nums)</span><br><span class="line"><span class="keyword">for</span> i:=<span class="number">2</span> ; i &lt; n ; i++&#123;</span><br><span class="line">        mx = max(mx,nums[i<span class="number">-2</span>])</span><br><span class="line">        <span class="keyword">if</span> mx &gt; nums[i]&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> algo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> leetcode刷题笔记 </tag>
+            
+            <tag> 逆序对 </tag>
+            
+            <tag> 推理题 </tag>
+            
+            <tag> 树状数组 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Redis集群化部署</title>
       <link href="/2022/11/15/dev/Redis%E9%9B%86%E7%BE%A4%E5%8C%96%E9%83%A8%E7%BD%B2/"/>
       <url>/2022/11/15/dev/Redis%E9%9B%86%E7%BE%A4%E5%8C%96%E9%83%A8%E7%BD%B2/</url>
@@ -190,9 +221,9 @@
       
         <tags>
             
-            <tag> 栈 </tag>
-            
             <tag> leetcode刷题笔记 </tag>
+            
+            <tag> 栈 </tag>
             
         </tags>
       
@@ -210,12 +241,14 @@
       
       <categories>
           
-          <category> algo </category>
+          <category> algo - summary </category>
           
       </categories>
       
       
         <tags>
+            
+            <tag> 树状数组 </tag>
             
             <tag> 算法模板 </tag>
             
@@ -226,8 +259,6 @@
             <tag> 拆分 </tag>
             
             <tag> 线段树 </tag>
-            
-            <tag> 树状数组 </tag>
             
         </tags>
       
@@ -240,12 +271,12 @@
       <link href="/2022/11/12/algoSummary/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF-%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0gcd/"/>
       <url>/2022/11/12/algoSummary/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF-%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0gcd/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>主要思路是辗转相除法</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> b != <span class="number">0</span> ? <span class="built_in">gcd</span>(b, a % b) : a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong><font color="purple">一个常考性质 </font></strong><br>一个数可以整除所有数  y1 y2 ..% x<br>等价这个数 可以整除所有数的最大公约数 y1 y2 …(的公约数) % x</p>]]></content>
       
       
       <categories>
           
-          <category> algo </category>
+          <category> algo - summary </category>
           
       </categories>
       
@@ -272,7 +303,7 @@
       
       <categories>
           
-          <category> algo </category>
+          <category> algo - summary </category>
           
       </categories>
       
@@ -299,7 +330,7 @@
       
       <categories>
           
-          <category> algo </category>
+          <category> algo - summary </category>
           
       </categories>
       
@@ -353,7 +384,7 @@
       
       <categories>
           
-          <category> algo </category>
+          <category> algo - summary </category>
           
       </categories>
       
@@ -362,9 +393,9 @@
             
             <tag> 算法模板 </tag>
             
-            <tag> 算法题型归纳 </tag>
-            
             <tag> 字符串哈希 </tag>
+            
+            <tag> 算法题型归纳 </tag>
             
         </tags>
       
@@ -382,7 +413,7 @@
       
       <categories>
           
-          <category> algo </category>
+          <category> algo - summary </category>
           
       </categories>
       
@@ -391,9 +422,9 @@
             
             <tag> 算法模板 </tag>
             
-            <tag> 并查集 </tag>
-            
             <tag> 算法题型归纳 </tag>
+            
+            <tag> 并查集 </tag>
             
         </tags>
       
@@ -554,7 +585,7 @@
       
       <categories>
           
-          <category> algo </category>
+          <category> algo - summary </category>
           
       </categories>
       
@@ -704,9 +735,9 @@
       
         <tags>
             
-            <tag> 双指针 </tag>
-            
             <tag> leetcode刷题笔记 </tag>
+            
+            <tag> 双指针 </tag>
             
             <tag> 二分 </tag>
             
@@ -863,7 +894,7 @@
       
       <categories>
           
-          <category> algo </category>
+          <category> algo - summary </category>
           
       </categories>
       
@@ -944,7 +975,7 @@
       
       <categories>
           
-          <category> algo </category>
+          <category> algo - summary </category>
           
       </categories>
       
