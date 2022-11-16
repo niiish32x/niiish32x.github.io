@@ -4,11 +4,38 @@
   
     
     <entry>
-      <title>leetcode775全局倒置与局部倒置</title>
-      <link href="/2022/11/16/leetcode775%E5%85%A8%E5%B1%80%E5%80%92%E7%BD%AE%E4%B8%8E%E5%B1%80%E9%83%A8%E5%80%92%E7%BD%AE/"/>
-      <url>/2022/11/16/leetcode775%E5%85%A8%E5%B1%80%E5%80%92%E7%BD%AE%E4%B8%8E%E5%B1%80%E9%83%A8%E5%80%92%E7%BD%AE/</url>
+      <title>算法模板-树状数组</title>
+      <link href="/2022/11/16/algoSummary/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF-%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
+      <url>/2022/11/16/algoSummary/%E7%AE%97%E6%B3%95%E6%A8%A1%E6%9D%BF-%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/</url>
       
-        <content type="html"><![CDATA[<h2 id="法1-推理"><a href="#法1-推理" class="headerlink" title="法1 推理"></a>法1 推理</h2><p>全局倒置 全局内 逆序的数对<br>局部倒置 相邻的逆序对<br>因此<strong>局部倒置 一定是 全局倒置</strong><br>即 全局倒置 &gt;&#x3D; 局部倒置<br>因此全局逆序对的产生方式 必须与局部逆序对相同<br>即 存在所有逆序对必须都是相邻逆序 如果不是相邻逆序 则为false</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line"><span class="keyword">if</span> a &gt; b &#123;</span><br><span class="line"><span class="keyword">return</span> a</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> b</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">isIdealPermutation</span><span class="params">(nums []<span class="type">int</span>)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">mx := nums[<span class="number">0</span>]</span><br><span class="line">    n := <span class="built_in">len</span>(nums)</span><br><span class="line"><span class="keyword">for</span> i:=<span class="number">2</span> ; i &lt; n ; i++&#123;</span><br><span class="line">        mx = max(mx,nums[i<span class="number">-2</span>])</span><br><span class="line">        <span class="keyword">if</span> mx &gt; nums[i]&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>树状数组 主要应用于单点修改和区间查询<br>核心操作就3个 lowbit \ add \ query</p><ol><li><p>lowbit<br>lowbit 返回二进制最后一位的数</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">lowbit</span><span class="params">(x)</span></span><span class="type">int</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &amp; -x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>add<br>为某一个位置x 加上一个数v (如果是减的话可以减去这个数的负数)</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(x,v <span class="type">int</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> i:= x ; i &lt;= n ; i+=lowbit(x)&#123;</span><br><span class="line">        tr[i] += v</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li><li><p>query<br>查询 1-x区间的数组和</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">query</span><span class="params">(x <span class="type">int</span>)</span></span><span class="type">int</span>&#123;</span><br><span class="line">    res := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i:= x ; i &gt; <span class="number">0</span> ; i-=lowbit(x)&#123;</span><br><span class="line">        res += tri[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> algo - summary </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 算法模板 </tag>
+            
+            <tag> 树状数组 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>leetcode775全局倒置与局部倒置</title>
+      <link href="/2022/11/16/leetcode/leetcode775%E5%85%A8%E5%B1%80%E5%80%92%E7%BD%AE%E4%B8%8E%E5%B1%80%E9%83%A8%E5%80%92%E7%BD%AE/"/>
+      <url>/2022/11/16/leetcode/leetcode775%E5%85%A8%E5%B1%80%E5%80%92%E7%BD%AE%E4%B8%8E%E5%B1%80%E9%83%A8%E5%80%92%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<p>原题链接:<br><a href="https://leetcode.cn/problems/global-and-local-inversions/">https://leetcode.cn/problems/global-and-local-inversions/</a><br>本质是一个判断逆序对的问题</p><h2 id="法1-推理"><a href="#法1-推理" class="headerlink" title="法1 推理"></a>法1 推理</h2><p>全局倒置 全局内 逆序的数对<br>局部倒置 相邻的逆序对<br>因此<strong>局部倒置 一定是 全局倒置</strong><br>即 全局倒置 &gt;&#x3D; 局部倒置<br>因此全局逆序对的产生方式 必须与局部逆序对相同<br>即 存在所有逆序对必须都是相邻逆序 如果不是相邻逆序 则为false</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">max</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line"><span class="keyword">if</span> a &gt; b &#123;</span><br><span class="line"><span class="keyword">return</span> a</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> b</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">isIdealPermutation</span><span class="params">(nums []<span class="type">int</span>)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">mx := nums[<span class="number">0</span>]</span><br><span class="line">    n := <span class="built_in">len</span>(nums)</span><br><span class="line"><span class="keyword">for</span> i:=<span class="number">2</span> ; i &lt; n ; i++&#123;</span><br><span class="line">        mx = max(mx,nums[i<span class="number">-2</span>])</span><br><span class="line">        <span class="keyword">if</span> mx &gt; nums[i]&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="法2-树状数组"><a href="#法2-树状数组" class="headerlink" title="法2 树状数组"></a>法2 树状数组</h2>]]></content>
       
       
       <categories>
@@ -20,13 +47,13 @@
       
         <tags>
             
+            <tag> 树状数组 </tag>
+            
             <tag> leetcode刷题笔记 </tag>
             
             <tag> 逆序对 </tag>
             
             <tag> 推理题 </tag>
-            
-            <tag> 树状数组 </tag>
             
         </tags>
       
@@ -221,9 +248,9 @@
       
         <tags>
             
-            <tag> leetcode刷题笔记 </tag>
-            
             <tag> 栈 </tag>
+            
+            <tag> leetcode刷题笔记 </tag>
             
         </tags>
       
@@ -248,8 +275,6 @@
       
         <tags>
             
-            <tag> 树状数组 </tag>
-            
             <tag> 算法模板 </tag>
             
             <tag> 区间问题 </tag>
@@ -259,6 +284,8 @@
             <tag> 拆分 </tag>
             
             <tag> 线段树 </tag>
+            
+            <tag> 树状数组 </tag>
             
         </tags>
       
@@ -735,9 +762,9 @@
       
         <tags>
             
-            <tag> leetcode刷题笔记 </tag>
-            
             <tag> 双指针 </tag>
+            
+            <tag> leetcode刷题笔记 </tag>
             
             <tag> 二分 </tag>
             
