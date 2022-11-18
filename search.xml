@@ -14,11 +14,9 @@
       
         <tags>
             
-            <tag> leetcode刷题笔记 </tag>
+            <tag> 分桶排序 </tag>
             
             <tag> 二分 </tag>
-            
-            <tag> 分桶排序 </tag>
             
         </tags>
       
@@ -90,14 +88,14 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
             
             <tag> 树状数组 </tag>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> 逆序对 </tag>
             
@@ -173,12 +171,12 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> 位运算 </tag>
             
@@ -231,12 +229,12 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> 记忆化搜索 </tag>
             
@@ -260,12 +258,12 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> 二叉搜索树bst </tag>
             
@@ -291,14 +289,14 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
             
             <tag> 栈 </tag>
-            
-            <tag> leetcode刷题笔记 </tag>
             
         </tags>
       
@@ -519,12 +517,12 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> 哈希 </tag>
             
@@ -550,12 +548,12 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> 记忆化搜索 </tag>
             
@@ -577,12 +575,12 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> dfs </tag>
             
@@ -633,12 +631,12 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> 枚举 </tag>
             
@@ -689,12 +687,12 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> 位运算 </tag>
             
@@ -716,12 +714,12 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> dfs </tag>
             
@@ -745,12 +743,12 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> bfs </tag>
             
@@ -794,37 +792,6 @@
     
     
     <entry>
-      <title>leetcode1346检查整数及其两倍数是否存在-一题多解</title>
-      <link href="/2022/08/30/leetcode/leetcode1346%E6%A3%80%E6%9F%A5%E6%95%B4%E6%95%B0%E5%8F%8A%E5%85%B6%E4%B8%A4%E5%80%8D%E6%95%B0%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8-%E4%B8%80%E9%A2%98%E5%A4%9A%E8%A7%A3/"/>
-      <url>/2022/08/30/leetcode/leetcode1346%E6%A3%80%E6%9F%A5%E6%95%B4%E6%95%B0%E5%8F%8A%E5%85%B6%E4%B8%A4%E5%80%8D%E6%95%B0%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8-%E4%B8%80%E9%A2%98%E5%A4%9A%E8%A7%A3/</url>
-      
-        <content type="html"><![CDATA[<p>个人认为很好的一道面试题<br>虽然题目简单但如果直接暴搜的话应该就直接回家等通知了<br>有好几种做法面试的时候都可以说一下</p><h2 id="法1-二分"><a href="#法1-二分" class="headerlink" title="法1: 二分"></a>法1: 二分</h2><p>排序后 遍历数组 二分查找是否存在二倍的值<br>复杂度:<br>排序 nlogn  二分 n * logn<br>O(nlogn)</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">List</span></span><br><span class="line"><span class="keyword">from</span> bisect <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">checkIfExist</span>(<span class="params">self, arr: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        arr.sort()</span><br><span class="line">        n = <span class="built_in">len</span>(arr)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            v = arr[i]</span><br><span class="line">            index = bisect_left(arr,<span class="number">2</span>*v)</span><br><span class="line">            <span class="keyword">if</span> index &gt;= n <span class="keyword">or</span> index == i:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> <span class="number">2</span>*v == arr[index]:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure><h2 id="法2-哈希"><a href="#法2-哈希" class="headerlink" title="法2: 哈希"></a>法2: 哈希</h2><p>遍历一遍将所有值都加到hash中<br>再遍历一遍 同时在hash中寻找结果<br>复杂度: 可做到近乎O(n)</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def checkIfExist(self, arr: List[int]) -&gt; bool:</span><br><span class="line">        s = set()</span><br><span class="line">        # 判断0的个数 防止只有一个0的情况出现</span><br><span class="line">        zeroCount = 0</span><br><span class="line">        for v in arr:</span><br><span class="line">            if not v:</span><br><span class="line">                zeroCount = zeroCount + 1</span><br><span class="line">            s.add(v)</span><br><span class="line"></span><br><span class="line">        for v in arr:</span><br><span class="line">            # 特判0 的情况</span><br><span class="line">            if not v:</span><br><span class="line">                if zeroCount &gt; 1:</span><br><span class="line">                    return True</span><br><span class="line">            elif 2*v in s:</span><br><span class="line">                return True</span><br><span class="line">        return False</span><br></pre></td></tr></table></figure><h2 id="法3-排序-双指针"><a href="#法3-排序-双指针" class="headerlink" title="法3 排序 双指针"></a>法3 排序 双指针</h2><p>这个做法的核心在于单调性的应用<br>以x&gt;0 为例:<br>对于排序后的数组<br>arr[i] * 2 &gt; arr[p]<br>p &#x3D; p + 1<br>即 i-p 之间均是小于arr[i] * 2 的数 因为数组本身单调增的 所以如果 i继续向右至j 那么原本 i-p 之间的数必然小于 arr[j] * 2 即p 只需遍历一次即可</p><p>复杂度:<br>排序 nlogn 遍历 2 * n<br>总的复杂度 O(nlogn)<br>不过这种方法相对来说还是复杂了一些 而且判断需要注意的细节也比较多 还是不建议写 </p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">checkIfExist</span>(<span class="params">self, arr: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(arr)</span><br><span class="line">        arr.sort()</span><br><span class="line">        p = <span class="number">0</span></span><br><span class="line">        <span class="comment"># 判断x 大于0的情况 </span></span><br><span class="line">        <span class="comment"># 对于排序后的数 arr[i]*2 &gt; arr[p]  p = p + 1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">while</span> p &lt; n <span class="keyword">and</span> arr[i] * <span class="number">2</span> &gt; arr[p]:</span><br><span class="line">                p = p + <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> p &lt; n <span class="keyword">and</span> p!=i <span class="keyword">and</span> arr[i] * <span class="number">2</span> == arr[p]:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line">        p = n - <span class="number">1</span></span><br><span class="line">        <span class="comment"># 判断小于0的情况</span></span><br><span class="line">        <span class="comment"># 对于排序后的数 arr[i]*2 &lt; arr[p]  p = p -1</span></span><br><span class="line">        <span class="comment"># 否则无法达成两倍这个条件 因为你负的数越往左才是越小其绝对值才是越大 </span></span><br><span class="line">        <span class="comment"># 同时i 逆着遍历 才能满足单调性一致 即p 不需要回溯</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">while</span> p &gt; -<span class="number">1</span> <span class="keyword">and</span> arr[i]*<span class="number">2</span> &lt; arr[p]:</span><br><span class="line">                p = p -<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> p &gt; -<span class="number">1</span> <span class="keyword">and</span> p!=i <span class="keyword">and</span> arr[i] * <span class="number">2</span> == arr[p]:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> algo </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 双指针 </tag>
-            
-            <tag> leetcode刷题笔记 </tag>
-            
-            <tag> 二分 </tag>
-            
-            <tag> 哈希 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>leetcode6163给定条件下构造矩阵-拓扑排序</title>
       <link href="/2022/08/28/leetcode/leetcode6163%E7%BB%99%E5%AE%9A%E6%9D%A1%E4%BB%B6%E4%B8%8B%E6%9E%84%E9%80%A0%E7%9F%A9%E9%98%B5-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/"/>
       <url>/2022/08/28/leetcode/leetcode6163%E7%BB%99%E5%AE%9A%E6%9D%A1%E4%BB%B6%E4%B8%8B%E6%9E%84%E9%80%A0%E7%9F%A9%E9%98%B5-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/</url>
@@ -836,12 +803,12 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> 拓扑排序 </tag>
             
@@ -895,9 +862,9 @@
       
         <tags>
             
-            <tag> 算法模板 </tag>
-            
             <tag> python </tag>
+            
+            <tag> 算法模板 </tag>
             
         </tags>
       
@@ -917,12 +884,12 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> 推导题(算法) </tag>
             
@@ -937,19 +904,19 @@
       <link href="/2022/08/18/leetcode/leetcode2376%E6%95%B0%E4%BD%8Ddp/"/>
       <url>/2022/08/18/leetcode/leetcode2376%E6%95%B0%E4%BD%8Ddp/</url>
       
-        <content type="html"><![CDATA[<p>原题链接:<br><a href="https://leetcode.cn/problems/count-special-integers/">https://leetcode.cn/problems/count-special-integers/</a></p><p>数位dp 虽然只要是枚举的过程  但需要考虑的情况比较多 且融合非常多的知识点 非常细致<br>主要需要注意以下几个点：</p><ol><li>枚举过的数 不能再枚举 可以用一个vis数组 但为了方便可以用二进制的方法 采用一个mask 进行解决</li><li>每个位置枚举的数 会受到前一个位置的限制 <ol><li>比如说 n&#x3D;123 那么如果 当前已经枚举的情况位 12_  那么最后一位只能枚举1 2  3 否则就会超过123 那么生成的数 就不符合答案标准了</li></ol></li><li>如果前一个数位为0 那么当前位置枚举数可能会存在重复<ol><li>比如说 9 09 009 则三个数都会出现重复 需要这种特殊情况进行判读那</li></ol></li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countSpecialNumbers</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 先将这个数转换为字符串 便于后续的操作</span></span><br><span class="line">        s = <span class="built_in">str</span>(n)</span><br><span class="line"></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        参数说明:</span></span><br><span class="line"><span class="string">        i 当前枚举的位数</span></span><br><span class="line"><span class="string">        mask 当前所枚举过的数 用二进制集合表示</span></span><br><span class="line"><span class="string">            mask&gt;&gt;d &amp; 1 是否为1  用于判断 d 是否已经枚举过</span></span><br><span class="line"><span class="string">            mask&gt;&gt;d | 1 将枚举过的这位进行标记</span></span><br><span class="line"><span class="string">        is_limit 表示前面所填的数字是否为n对应位上的 如果是 那么当前位所填的数字就要受到数n制约 即最大不能超过n在当前位的数字 否则可以直接枚举0-9  </span></span><br><span class="line"><span class="string">        is_num 表示前面是否填了数字(是否跳过数字0) </span></span><br><span class="line"><span class="string">            如果没有填数字0 则跳过当前位置 或者从1开始计数 </span></span><br><span class="line"><span class="string">            否则(is_num = true) 可以从0开始给</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">        @cache</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">i: <span class="built_in">int</span>, mask: <span class="built_in">int</span>, is_limit: <span class="built_in">bool</span>, is_num: <span class="built_in">bool</span></span>)-&gt;<span class="built_in">int</span>:</span><br><span class="line">            <span class="comment"># 枚举的位数 已经达到了 n 的位数 直接返回</span></span><br><span class="line">            <span class="keyword">if</span> i == <span class="built_in">len</span>(s):</span><br><span class="line">                <span class="comment"># 如果之前已经填过数字 那么即代表已经成功构造出一个有效答案 否则return 0</span></span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">int</span>(is_num)</span><br><span class="line">            res = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 如果is_num 为false 即之前还没有填过数</span></span><br><span class="line">            <span class="comment"># 这里先选择直接跳过 因为这里还没有进入枚举环节</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> is_num:</span><br><span class="line">                <span class="comment"># 比如 009 如果 他之前的值并没有枚举过 那么这种情况 就会和 09 9 两种情况重复了 所以选择跳过</span></span><br><span class="line">                <span class="comment"># is_limit 之前都没有填过数 那么当然也不可能填 n 对应位上的数 所以仍位false</span></span><br><span class="line">                <span class="comment"># is_num 之前没有填数字 这位跳过了 那么这位自然也没有填数组</span></span><br><span class="line">                res = f(i + <span class="number">1</span>, mask, <span class="literal">False</span>, <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 进行枚举 先判断上界</span></span><br><span class="line">            <span class="comment"># 如果之前填过 n相应位置上的数 那么 当前的上界也就只能是 n当前位置上的数 否则可以是0-9</span></span><br><span class="line">            <span class="comment"># 比如 n = 123  上一个枚举的数位已经填 12_ 那么该位置上最多只能填到3 否则就超过n 不符合条件了 否则就能填到0-9</span></span><br><span class="line">            up = <span class="built_in">int</span>(s[i]) <span class="keyword">if</span> is_limit <span class="keyword">else</span> <span class="number">9</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 枚举当前位的数</span></span><br><span class="line">            <span class="comment"># 如果之前位上有填过数 那么当前位就可以从 0 开始 否则就应该从1 开始</span></span><br><span class="line">            start = <span class="number">1</span> - <span class="built_in">int</span>(is_num)</span><br><span class="line">            <span class="comment"># range算法 右边是小于号 所以是 up+1</span></span><br><span class="line">            <span class="keyword">for</span> d <span class="keyword">in</span> <span class="built_in">range</span>(start, up + <span class="number">1</span>):</span><br><span class="line">                <span class="comment"># 如果 d 并没有被枚举过</span></span><br><span class="line">                <span class="keyword">if</span> mask &gt;&gt; d &amp; <span class="number">1</span> == <span class="number">0</span>:</span><br><span class="line">                    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                    i + 1 : 枚举下一位</span></span><br><span class="line"><span class="string">                    mask | (1 &lt;&lt; d) : 将d 标记  </span></span><br><span class="line"><span class="string">                                      1&lt;&lt;d :  第d位为1 其他位均为0 或运算即可将mask的相应置成1</span></span><br><span class="line"><span class="string">                    is_limit and d == up: 前面所有位都1取到 n相应位的数 才对当前位有限制 否则当前仍可以去0-9 </span></span><br><span class="line"><span class="string">                    True: 当前位置填过数了 那么当前位自然位1</span></span><br><span class="line"><span class="string">                    &quot;&quot;&quot;</span></span><br><span class="line">                    res += f(i + <span class="number">1</span>, mask | (<span class="number">1</span> &lt;&lt; d), is_limit <span class="keyword">and</span> d == up, <span class="literal">True</span>)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="comment"># 初始位 0  mask中一个数都没有用过 也为0</span></span><br><span class="line">        <span class="comment"># is_limit为一个特判 要加以限制置为True     is_Num没有取过数自然为False</span></span><br><span class="line">        <span class="keyword">return</span> f(<span class="number">0</span>, <span class="number">0</span>, <span class="literal">True</span>, <span class="literal">False</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>上面的写法使用了python 中内置的cache 但由于别的语言没有cache关键字 且正常记忆化搜索 通常会创建一个数据 用作cache 所以这里附上不使用cache 关键字的做法 更具有代表性一些</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countSpecialNumbers</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        s = <span class="built_in">str</span>(n)</span><br><span class="line"><span class="comment"># 这里关于python 二维数组的初始化定义一定要注意下 一定要写成这样 </span></span><br><span class="line"><span class="comment"># 且第一维决定的是列数 二维决定的是行数 这也为数不多我认为python比较麻烦的地方</span></span><br><span class="line">        dp = [[-<span class="number">1</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">1</span>&lt;&lt;<span class="number">10</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(s))]</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">i: <span class="built_in">int</span>, mask: <span class="built_in">int</span>, is_limit: <span class="built_in">bool</span>, is_num: <span class="built_in">bool</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">            <span class="keyword">if</span> i == <span class="built_in">len</span>(s):</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">int</span>(is_num)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> is_limit <span class="keyword">and</span> is_num <span class="keyword">and</span> dp[i][mask] &gt;= <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> dp[i][mask]</span><br><span class="line">            res = <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> is_num:</span><br><span class="line">                res = f(i + <span class="number">1</span>, mask, <span class="literal">False</span>, <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">            up = <span class="built_in">int</span>(s[i]) <span class="keyword">if</span> is_limit <span class="keyword">else</span> <span class="number">9</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> d <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span> - <span class="built_in">int</span>(is_num), up + <span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> mask &gt;&gt; d &amp; <span class="number">1</span> == <span class="number">0</span>:</span><br><span class="line">                    res += f(i + <span class="number">1</span>, mask | (<span class="number">1</span> &lt;&lt; d), is_limit <span class="keyword">and</span> d == up, <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> is_limit <span class="keyword">and</span> is_num:</span><br><span class="line">                dp[i][mask] = res</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> f(<span class="number">0</span>, <span class="number">0</span>, <span class="literal">True</span>, <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<p>原题链接:<br><a href="https://leetcode.cn/problems/count-special-integers/">https://leetcode.cn/problems/count-special-integers/</a></p><p>数位dp 虽然只要是枚举的过程  但需要考虑的情况比较多 且融合非常多的知识点 非常细致<br>主要需要注意以下几个点：</p><ol><li>枚举过的数 不能再枚举 可以用一个vis数组 但为了方便可以用二进制的方法 采用一个mask 进行解决</li><li>每个位置枚举的数 会受到前一个位置的限制 <ol><li>比如说 n&#x3D;123 那么如果 当前已经枚举的情况位 12_  那么最后一位只能枚举1 2  3 否则就会超过123 那么生成的数 就不符合答案标准了</li></ol></li><li>如果前一个数位为0 那么当前位置枚举数可能会存在重复<ol start="2"><li>比如说 9 09 009 则三个数都会出现重复 需要这种特殊情况进行判读那</li></ol></li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countSpecialNumbers</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 先将这个数转换为字符串 便于后续的操作</span></span><br><span class="line">        s = <span class="built_in">str</span>(n)</span><br><span class="line"></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        参数说明:</span></span><br><span class="line"><span class="string">        i 当前枚举的位数</span></span><br><span class="line"><span class="string">        mask 当前所枚举过的数 用二进制集合表示</span></span><br><span class="line"><span class="string">            mask&gt;&gt;d &amp; 1 是否为1  用于判断 d 是否已经枚举过</span></span><br><span class="line"><span class="string">            mask&gt;&gt;d | 1 将枚举过的这位进行标记</span></span><br><span class="line"><span class="string">        is_limit 表示前面所填的数字是否为n对应位上的 如果是 那么当前位所填的数字就要受到数n制约 即最大不能超过n在当前位的数字 否则可以直接枚举0-9  </span></span><br><span class="line"><span class="string">        is_num 表示前面是否填了数字(是否跳过数字0) </span></span><br><span class="line"><span class="string">            如果没有填数字0 则跳过当前位置 或者从1开始计数 </span></span><br><span class="line"><span class="string">            否则(is_num = true) 可以从0开始给</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">        @cache</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">i: <span class="built_in">int</span>, mask: <span class="built_in">int</span>, is_limit: <span class="built_in">bool</span>, is_num: <span class="built_in">bool</span></span>)-&gt;<span class="built_in">int</span>:</span><br><span class="line">            <span class="comment"># 枚举的位数 已经达到了 n 的位数 直接返回</span></span><br><span class="line">            <span class="keyword">if</span> i == <span class="built_in">len</span>(s):</span><br><span class="line">                <span class="comment"># 如果之前已经填过数字 那么即代表已经成功构造出一个有效答案 否则return 0</span></span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">int</span>(is_num)</span><br><span class="line">            res = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 如果is_num 为false 即之前还没有填过数</span></span><br><span class="line">            <span class="comment"># 这里先选择直接跳过 因为这里还没有进入枚举环节</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> is_num:</span><br><span class="line">                <span class="comment"># 比如 009 如果 他之前的值并没有枚举过 那么这种情况 就会和 09 9 两种情况重复了 所以选择跳过</span></span><br><span class="line">                <span class="comment"># is_limit 之前都没有填过数 那么当然也不可能填 n 对应位上的数 所以仍位false</span></span><br><span class="line">                <span class="comment"># is_num 之前没有填数字 这位跳过了 那么这位自然也没有填数组</span></span><br><span class="line">                res = f(i + <span class="number">1</span>, mask, <span class="literal">False</span>, <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 进行枚举 先判断上界</span></span><br><span class="line">            <span class="comment"># 如果之前填过 n相应位置上的数 那么 当前的上界也就只能是 n当前位置上的数 否则可以是0-9</span></span><br><span class="line">            <span class="comment"># 比如 n = 123  上一个枚举的数位已经填 12_ 那么该位置上最多只能填到3 否则就超过n 不符合条件了 否则就能填到0-9</span></span><br><span class="line">            up = <span class="built_in">int</span>(s[i]) <span class="keyword">if</span> is_limit <span class="keyword">else</span> <span class="number">9</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 枚举当前位的数</span></span><br><span class="line">            <span class="comment"># 如果之前位上有填过数 那么当前位就可以从 0 开始 否则就应该从1 开始</span></span><br><span class="line">            start = <span class="number">1</span> - <span class="built_in">int</span>(is_num)</span><br><span class="line">            <span class="comment"># range算法 右边是小于号 所以是 up+1</span></span><br><span class="line">            <span class="keyword">for</span> d <span class="keyword">in</span> <span class="built_in">range</span>(start, up + <span class="number">1</span>):</span><br><span class="line">                <span class="comment"># 如果 d 并没有被枚举过</span></span><br><span class="line">                <span class="keyword">if</span> mask &gt;&gt; d &amp; <span class="number">1</span> == <span class="number">0</span>:</span><br><span class="line">                    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                    i + 1 : 枚举下一位</span></span><br><span class="line"><span class="string">                    mask | (1 &lt;&lt; d) : 将d 标记  </span></span><br><span class="line"><span class="string">                                      1&lt;&lt;d :  第d位为1 其他位均为0 或运算即可将mask的相应置成1</span></span><br><span class="line"><span class="string">                    is_limit and d == up: 前面所有位都1取到 n相应位的数 才对当前位有限制 否则当前仍可以去0-9 </span></span><br><span class="line"><span class="string">                    True: 当前位置填过数了 那么当前位自然位1</span></span><br><span class="line"><span class="string">                    &quot;&quot;&quot;</span></span><br><span class="line">                    res += f(i + <span class="number">1</span>, mask | (<span class="number">1</span> &lt;&lt; d), is_limit <span class="keyword">and</span> d == up, <span class="literal">True</span>)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="comment"># 初始位 0  mask中一个数都没有用过 也为0</span></span><br><span class="line">        <span class="comment"># is_limit为一个特判 要加以限制置为True     is_Num没有取过数自然为False</span></span><br><span class="line">        <span class="keyword">return</span> f(<span class="number">0</span>, <span class="number">0</span>, <span class="literal">True</span>, <span class="literal">False</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>上面的写法使用了python 中内置的cache 但由于别的语言没有cache关键字 且正常记忆化搜索 通常会创建一个数据 用作cache 所以这里附上不使用cache 关键字的做法 更具有代表性一些</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countSpecialNumbers</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        s = <span class="built_in">str</span>(n)</span><br><span class="line"><span class="comment"># 这里关于python 二维数组的初始化定义一定要注意下 一定要写成这样 </span></span><br><span class="line"><span class="comment"># 且第一维决定的是列数 二维决定的是行数 这也为数不多我认为python比较麻烦的地方</span></span><br><span class="line">        dp = [[-<span class="number">1</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">1</span>&lt;&lt;<span class="number">10</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(s))]</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">i: <span class="built_in">int</span>, mask: <span class="built_in">int</span>, is_limit: <span class="built_in">bool</span>, is_num: <span class="built_in">bool</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">            <span class="keyword">if</span> i == <span class="built_in">len</span>(s):</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">int</span>(is_num)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> is_limit <span class="keyword">and</span> is_num <span class="keyword">and</span> dp[i][mask] &gt;= <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> dp[i][mask]</span><br><span class="line">            res = <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> is_num:</span><br><span class="line">                res = f(i + <span class="number">1</span>, mask, <span class="literal">False</span>, <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">            up = <span class="built_in">int</span>(s[i]) <span class="keyword">if</span> is_limit <span class="keyword">else</span> <span class="number">9</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> d <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span> - <span class="built_in">int</span>(is_num), up + <span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> mask &gt;&gt; d &amp; <span class="number">1</span> == <span class="number">0</span>:</span><br><span class="line">                    res += f(i + <span class="number">1</span>, mask | (<span class="number">1</span> &lt;&lt; d), is_limit <span class="keyword">and</span> d == up, <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> is_limit <span class="keyword">and</span> is_num:</span><br><span class="line">                dp[i][mask] = res</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> f(<span class="number">0</span>, <span class="number">0</span>, <span class="literal">True</span>, <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> 数位dp </tag>
             
@@ -998,12 +965,12 @@
           
           <category> algo </category>
           
+          <category> leetcode </category>
+          
       </categories>
       
       
         <tags>
-            
-            <tag> leetcode刷题笔记 </tag>
             
             <tag> 位运算 </tag>
             
