@@ -59,14 +59,14 @@
       
       <categories>
           
-          <category> algo - summary </category>
+          <category> algo </category>
+          
+          <category> 算法总结 </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> 算法模板 </tag>
             
             <tag> 树状数组 </tag>
             
@@ -314,14 +314,14 @@
       
       <categories>
           
-          <category> algo - summary </category>
+          <category> algo </category>
+          
+          <category> 算法总结 </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> 算法模板 </tag>
             
             <tag> 区间问题 </tag>
             
@@ -349,14 +349,14 @@
       
       <categories>
           
-          <category> algo - summary </category>
+          <category> algo </category>
+          
+          <category> 算法总结 </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> 算法模板 </tag>
             
             <tag> 最大公约数 </tag>
             
@@ -376,14 +376,14 @@
       
       <categories>
           
-          <category> algo - summary </category>
+          <category> algo </category>
+          
+          <category> 算法总结 </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> 算法题型归纳 </tag>
             
             <tag> 双指针 </tag>
             
@@ -403,14 +403,14 @@
       
       <categories>
           
-          <category> algo - summary </category>
+          <category> algo </category>
+          
+          <category> 算法总结 </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> 算法题型归纳 </tag>
             
             <tag> 栈 </tag>
             
@@ -457,14 +457,14 @@
       
       <categories>
           
-          <category> algo - summary </category>
+          <category> algo </category>
+          
+          <category> 算法总结 </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> 算法模板 </tag>
             
             <tag> 字符串哈希 </tag>
             
@@ -486,14 +486,14 @@
       
       <categories>
           
-          <category> algo - summary </category>
+          <category> algo </category>
+          
+          <category> 算法总结 </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> 算法模板 </tag>
             
             <tag> 算法题型归纳 </tag>
             
@@ -658,14 +658,14 @@
       
       <categories>
           
-          <category> algo - summary </category>
+          <category> algo </category>
+          
+          <category> 算法总结 </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> 算法模板 </tag>
             
             <tag> trie树 </tag>
             
@@ -936,14 +936,14 @@
       
       <categories>
           
-          <category> algo - summary </category>
+          <category> algo </category>
+          
+          <category> 算法总结 </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> 算法模板 </tag>
             
             <tag> 循环队列 </tag>
             
@@ -1017,14 +1017,14 @@
       
       <categories>
           
-          <category> algo - summary </category>
+          <category> algo </category>
+          
+          <category> 算法总结 </category>
           
       </categories>
       
       
         <tags>
-            
-            <tag> 算法模板 </tag>
             
             <tag> 组合数(算法) </tag>
             
