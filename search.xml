@@ -4,6 +4,71 @@
   
     
     <entry>
+      <title>diary-2022-12-1</title>
+      <link href="/2022/12/01/life/diary-2022-12-1/"/>
+      <url>/2022/12/01/life/diary-2022-12-1/</url>
+      
+        <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <script id="hbeData" type="hbeData" data-hmacdigest="e851c8d8e076f14390a799dedf9bc0a5abae2139f3daeb770507e2785c24323e">abb32f68827b16598088320c52df6dce30e007416c0afc39f329688bec406c30939c456c5b074d02a47cf2d40db7c9ffa775112994ec34df02dc3a2d23c1371957f2bf68ed9fd51d8c79984ea17f163aac67a3aa7ee527a16b558ea114ec5e01</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-default">      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>      </label>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      
+      
+      <categories>
+          
+          <category> life </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 生活随笔 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>区块链基本概念</title>
+      <link href="/2022/11/28/blockchain/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/"/>
+      <url>/2022/11/28/blockchain/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
+      
+        <content type="html"><![CDATA[<p><strong>区块链的核心意义就是保证承诺不被违背</strong></p><ol><li>Immutable</li><li>Decentralized</li><li>Transparent</li></ol><h2 id="区块链的应用"><a href="#区块链的应用" class="headerlink" title="区块链的应用"></a>区块链的应用</h2><ol><li>DeFi</li><li>DAOs</li><li>NFTs</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> blockchain </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux使用笔记</title>
+      <link href="/2022/11/26/Linux%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/"/>
+      <url>/2022/11/26/Linux%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Ubuntu下无法从本地上传文件的解决方法"><a href="#Ubuntu下无法从本地上传文件的解决方法" class="headerlink" title="Ubuntu下无法从本地上传文件的解决方法"></a>Ubuntu下无法从本地上传文件的解决方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 777 filename</span><br></pre></td></tr></table></figure><p>为文件夹进行授权 从而在该文件夹下即可以进行上传</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> dev </category>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>食品追溯系统</title>
       <link href="/2022/11/23/food-trace/"/>
       <url>/2022/11/23/food-trace/</url>
