@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>JVM_5运行时数据区 | niiish32x 's blog</title><meta name="author" content="Ni"><meta name="copyright" content="Ni"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="总览 面试相关难题  Java的内存分成哪几部分 详细介绍一下 Java内存中哪些部分会溢出？ JDK7和8在内存结构上的区别是什么？  内存调优: 程序计数器程序计数器(Program Conter Register) 也叫PC寄存器 每个线程会通过程序计数器记录当前要执行的字节码指令的地址  在加载阶段 虚拟机将字节码文件中的指令读取到内存之后 会将原文件中的偏移量转换成内存地址 每一条字节码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM_5运行时数据区">
+<meta property="og:url" content="http://example.com/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/index.html">
+<meta property="og:site_name" content="niiish32x &#39;s blog">
+<meta property="og:description" content="总览 面试相关难题  Java的内存分成哪几部分 详细介绍一下 Java内存中哪些部分会溢出？ JDK7和8在内存结构上的区别是什么？  内存调优: 程序计数器程序计数器(Program Conter Register) 也叫PC寄存器 每个线程会通过程序计数器记录当前要执行的字节码指令的地址  在加载阶段 虚拟机将字节码文件中的指令读取到内存之后 会将原文件中的偏移量转换成内存地址 每一条字节码">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/bkg19.jpg">
+<meta property="article:published_time" content="2023-10-18T10:13:10.000Z">
+<meta property="article:modified_time" content="2023-10-19T11:26:30.254Z">
+<meta property="article:author" content="Ni">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/bkg19.jpg"><link rel="shortcut icon" href="/images/kwer.ico"><link rel="canonical" href="http://example.com/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JVM_5运行时数据区',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-19 19:26:30'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/iconfont/iconfont.css"><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/progress_bar.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://img.picgo.net/2022/11/10/kwe.th.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">143</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">121</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/algo/"><i class="fa-fw iconfont icon-suanfaku"></i><span> 算法</span></a></li><li><a class="site-page child" href="/dev/"><i class="fa-fw iconfont icon-kaifa"></i><span> 开发</span></a></li><li><a class="site-page child" href="/AI/"><i class="fa-fw iconfont icon-rengongzhineng"></i><span> 机器学习</span></a></li><li><a class="site-page child" href="/life"><i class="fa-fw iconfont icon-biji"></i><span> 生活随笔</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/bkg19.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">niiish32x 's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/algo/"><i class="fa-fw iconfont icon-suanfaku"></i><span> 算法</span></a></li><li><a class="site-page child" href="/dev/"><i class="fa-fw iconfont icon-kaifa"></i><span> 开发</span></a></li><li><a class="site-page child" href="/AI/"><i class="fa-fw iconfont icon-rengongzhineng"></i><span> 机器学习</span></a></li><li><a class="site-page child" href="/life"><i class="fa-fw iconfont icon-biji"></i><span> 生活随笔</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JVM_5运行时数据区</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-18T10:13:10.000Z" title="发表于 2023-10-18 18:13:10">2023-10-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-19T11:26:30.254Z" title="更新于 2023-10-19 19:26:30">2023-10-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/interview/">interview</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JVM_5运行时数据区"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>总览<br><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img1.png" style="zoom:100%"></p>
+<p>面试相关难题</p>
+<ol>
+<li>Java的内存分成哪几部分 详细介绍一下</li>
+<li>Java内存中哪些部分会溢出？</li>
+<li>JDK7和8在内存结构上的区别是什么？</li>
+</ol>
+<p>内存调优:<br><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img2.png" style="zoom:100%"></p>
+<h2><span id="程序计数器">程序计数器</span></h2><p>程序计数器(Program Conter Register) 也叫PC寄存器 每个线程会通过程序计数器记录当前要执行的字节码指令的地址</p>
+<ol>
+<li>在加载阶段 虚拟机将字节码文件中的指令读取到内存之后 会将原文件中的偏移量转换成内存地址 每一条字节码指令都会拥有一个内存地址</li>
+<li>在代码执行过程中 程序计数器会记录下一行字节码指令的地址 执行完当前指令之后 虚拟机的执行引擎根据程序计数器执行下一行指令</li>
+<li>程序计数器可以控制程序指令的进行，实现分支、跳转、异常等逻辑</li>
+<li>在多线程执行情况下 Java虚拟机需要通过程序计数器记录CPU切换前解释执行到哪一句指令并继续解释运行</li>
+</ol>
+<p><strong>问题: 程序计数器在运行中会出现内存溢出吗?</strong><br>内存溢出:指的是程序在使用某一块内存区域时，存放的数据需要占用的内存大小超过了虚拟机能提供的内存上限<br>不会<br>因为每个线程只存储一个固定长度的内存地址 程序计数器是不会发生内存溢出的(程序员无需对程序计数器做任何处理 程序计数器完全由java虚拟机控制)</p>
+<h2><span id="栈">栈</span></h2><p>Java虚拟机栈  本地方法栈</p>
+<h3><span id="java虚拟机栈">Java虚拟机栈</span></h3><ol>
+<li>Java虚拟机栈 采用栈的数据结构来管理方法调用中的基本数据 每一个方法的调用使用一个栈帧来保存</li>
+<li>Java虚拟机栈随着线程的创建而创建 而回收则会在线程的销毁时进行 由于方法可能会在不同线程中执行 每个线程都会包含一个自己的虚拟机栈</li>
+</ol>
+<p><strong>栈帧的组成</strong><br><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img3.png" style="zoom:100%"></p>
+<h4><span id="局部变量表">局部变量表</span></h4><p>作用是在运行过程中存放所有的局部变量 -&gt; 编译成字节码文件时就可以确定局部变量表的内容</p>
+<ol>
+<li>栈帧中的局部变量表是一个数组 数组每一个位置称之为槽(slot)  long和double类型占用两个槽 其他类型占一个槽</li>
+<li>实例方法中的序号为0的位置存放的是this(<strong>即当前实例对象的引用</strong>) 指的是当前调用方法的对象 运行时会在内存中存放实例对象的地址</li>
+<li>方法参数也会保存在局部变量表中 其顺序与方法中参数定义的顺序一致</li>
+<li>局部变量表保存的内容由：实例方法的this对象 方法的参数 方法体中声明的局部变量</li>
+</ol>
+<p>问题:<br><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img4.png" style="zoom:100%"><br>(答案并不是9 (9 的算法: this 1个 6个int 1个long))</p>
+<p>为了节省空间 局部变量表中的槽是可以<strong>复用</strong>的 一旦某个局部变量不再生效 当前槽就可以再次被使用</p>
+<h4><span id="操作数栈">操作数栈</span></h4><p>是栈帧中虚拟机在执行指令过程中用来存放临时数据的一块区域<br>操作数栈是栈帧中虚拟机在执行指令过程中用来存放中间数据的一块区域 他是一种栈式的数据结构 如果一条指令将一个值压入操作数栈 则后面的指令可以弹出并使用改值<br>在<em>编译器</em>就可以确定操作数栈的最大深度 从而执行时正确的分配内存大小</p>
+<h4><span id="帧数据">帧数据</span></h4><p>帧数据主要包含动态链接、方法出口、异常表的引用</p>
+<ol>
+<li><p>动态链接<br>当前类的字节码指令引用了其他类的属性或者方法时 需要将符号引用(编号) 转换成对应的运行时常量池中的内存地址 动态链接就保存了编号到运行时常量池的内存地址的映射关系</p>
+<img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img5.png" style="zoom:100%">
+</li>
+<li><p>方法出口<br>方法出口指的是方法在正确或异常结束时 当前栈帧会被弹出 同时程序计数器应该指向上一个栈帧中的下一条指令的地址 所以在当前栈中 需要存储此方法出口的地址</p>
+</li>
+<li><p>异常表<br>异常表存放的是异常的处理信息 包含了try代码块和catch代码块执行后跳转到的字节码指令位置</p>
+</li>
+</ol>
+<h3><span id="栈-内存溢出">栈-内存溢出</span></h3><p>Java虚拟机栈如果栈帧过多 占用内存超过栈内存可以分配的最大大小就会出现内存溢出<br>Java虚拟机栈内存溢出时会出现StackOverflowError的错误</p>
+<p>Java虚拟机栈 注意事项<br><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img6.png" style="zoom:100%"></p>
+<h3><span id="本地方法栈">本地方法栈</span></h3><p>Java虚拟机栈存储了Java方法调用时的栈帧 而本地方法存储的是native本地方法(用C++来写)的栈帧<br>在Hotspot虚拟机中 Java虚拟机栈和本地方法栈实现上使用了同一个栈空间 本地方法栈会在栈内存上生成一个栈帧 临时保存方法的参数同时方便出现异常时也把本地方法的栈信息打印出来</p>
+<h2><span id="堆内存">堆内存</span></h2><p>堆内存存储<strong>对象</strong><br><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img7.png" style="zoom:100%"></p>
+<p>堆内存也会发生内存溢出 -&gt; OutofMemory错误</p>
+<p>堆内存的三个值 used total max<br>max默认为系统的1&#x2F;4 total默认为系统的1&#x2F;64</p>
+<img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img8.png" style="zoom:100%">
+
+<p>随着堆中的对象增多 当total可以使用的内存<strong>即将</strong>不足时 java虚拟机会继续分配内存给堆<br>total值会变大 total最多只能与max相等</p>
+<p>问题:<br><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img9.png" style="zoom:100%"></p>
+<h2><span id="方法区">方法区</span></h2><p>方法区是存放基础信息的位置 线程共享 主要包含:</p>
+<img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img10.png" style="zoom:100%">
+
+<ol>
+<li>方法区是用来存储每个类的基本信息(元信息) 一般称之为InstanceKlass对象 在类的<strong>加载阶段</strong>完成</li>
+<li><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img11.png" style="zoom:100%"></li>
+</ol>
+<p>方法区属于&lt;&lt;JAVA虚拟机规范&gt;&gt;中设计的虚拟概念<br>JDK7中使用永久代来实现<br>JDK8中使用元空间来实现<br><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img12.png" style="zoom:100%"></p>
+<p>方法区溢出<br><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img13.png" style="zoom:100%"><br>为元空间分配最大内存大小 防止内存占用率过高</p>
+<h3><span id="字符串常量池">字符串常量池</span></h3><p>字符串中常量池存储在代码中定义的常量字符串内容 比如”123” 这个”123”就会被放入字符串常量池<br><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img14.png" style="zoom:100%"><br>s1 通过new 关键字创建对象 最终会放在堆内存中 (s1是栈中的局部变量 用于表示字符串”123”在堆内存中的地址)<br>s2 并没有通过new关键字创建对象 s2存放的是字符串常量池中”abc”的地址</p>
+<img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img15.png" style="zoom:100%">
+即JDK8以后 运行时常量池和字符串常量池就已经不是一个东西了
+
+<p>问题1:<br><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img16.png" style="zoom:100%"><br>分析:<br><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img17.png" style="zoom:100%"></p>
+<p>如上图所示显然是不相等 a b c 中存放的字符串常量池中的地址<br>但是根据底层代码(字节码指令)所示 d &#x3D; a + b 在底层实际是使用了new方法进行创建<br>即<strong>变量 连接使用的是StringBuilder</strong><br>因此d中存放的堆内存中的地址 c与d显然是不相等</p>
+<p>问题2:<br><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img18.png" style="zoom:100%"></p>
+<p>d为<strong>常量 编译阶段直接连接</strong></p>
+<h2><span id="直接内存">直接内存</span></h2><img src="/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/img19.png" style="zoom:100%">
+
+<h1><span id="总结">总结</span></h1></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://niiish32x.github.io/">Ni</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/">http://example.com/2023/10/18/interview/JVM_5%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">niiish32x 's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JVM/">JVM</a></div><div class="post_share"><div class="social-share" data-image="/images/bkg19.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/10/14/interview/JVM_1%E5%88%9D%E8%AF%86/" title="JVM_1初识"><img class="cover" src="/images/bkg9.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-14</div><div class="title">JVM_1初识</div></div></a></div><div><a href="/2023/10/14/interview/JVM_2%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" title="JVM_2字节码文件详解"><img class="cover" src="/images/bkg26.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-14</div><div class="title">JVM_2字节码文件详解</div></div></a></div><div><a href="/2023/10/15/interview/JVM_3%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="JVM_3类的生命周期"><img class="cover" src="/images/bkg5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-15</div><div class="title">JVM_3类的生命周期</div></div></a></div><div><a href="/2023/10/20/interview/JVM_6%E8%87%AA%E5%8A%A8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" title="JVM_6自动垃圾回收"><img class="cover" src="/images/bkg26.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-20</div><div class="title">JVM_6自动垃圾回收</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://img.picgo.net/2022/11/10/kwe.th.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ni</div><div class="author-info__description">纵有疾风起 人生不言弃</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">143</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">121</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/niiish32x" target="_blank" title="Github"><i class="iconfont icon-github"></i></a><a class="social-icon" href="mailto:1159417019@qq.com" target="_blank" title="Email"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://leetcode.cn/u/niiish" target="_blank" title="Leetcode"><i class="iconfont icon-leetcode1"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">程序计数器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">Java虚拟机栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.1.</span> <span class="toc-text">局部变量表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.2.</span> <span class="toc-text">操作数栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.3.</span> <span class="toc-text">帧数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">栈-内存溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.3.</span> <span class="toc-text">本地方法栈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">堆内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">方法区</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text">字符串常量池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">直接内存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">总结</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/12/06/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98/2SQL%E7%BB%83%E4%B9%A0/" title="SQL练习"><img src="/images/bkg4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SQL练习"/></a><div class="content"><a class="title" href="/2023/12/06/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98/2SQL%E7%BB%83%E4%B9%A0/" title="SQL练习">SQL练习</a><time datetime="2023-12-06T06:35:49.000Z" title="发表于 2023-12-06 14:35:49">2023-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/05/leetcode/leetcode2477%E5%88%B0%E8%BE%BE%E9%A6%96%E9%83%BD%E7%9A%84%E6%9C%80%E5%B0%91%E6%B2%B9%E8%80%97/" title="leetcode198到达首都的最少油耗"><img src="/images/bkg14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="leetcode198到达首都的最少油耗"/></a><div class="content"><a class="title" href="/2023/12/05/leetcode/leetcode2477%E5%88%B0%E8%BE%BE%E9%A6%96%E9%83%BD%E7%9A%84%E6%9C%80%E5%B0%91%E6%B2%B9%E8%80%97/" title="leetcode198到达首都的最少油耗">leetcode198到达首都的最少油耗</a><time datetime="2023-12-04T23:56:10.000Z" title="发表于 2023-12-05 07:56:10">2023-12-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/04/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98/1leetcode%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%80%83150/" title="leetcode面试常考150"><img src="/images/bkg25.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="leetcode面试常考150"/></a><div class="content"><a class="title" href="/2023/12/04/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98/1leetcode%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%80%83150/" title="leetcode面试常考150">leetcode面试常考150</a><time datetime="2023-12-04T06:17:02.000Z" title="发表于 2023-12-04 14:17:02">2023-12-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/30/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98/2%E5%AD%97%E8%8A%82%E9%9D%A2%E7%BB%8F%E6%B1%87%E6%80%BB/" title="字节面经汇总"><img src="/images/bkg19.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="字节面经汇总"/></a><div class="content"><a class="title" href="/2023/11/30/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98/2%E5%AD%97%E8%8A%82%E9%9D%A2%E7%BB%8F%E6%B1%87%E6%80%BB/" title="字节面经汇总">字节面经汇总</a><time datetime="2023-11-30T03:02:21.000Z" title="发表于 2023-11-30 11:02:21">2023-11-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/28/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98/2%E6%BB%B4%E6%BB%B4%E4%BB%A3%E7%A0%81%E9%A2%98/" title="滴滴代码题"><img src="/images/bkg14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="滴滴代码题"/></a><div class="content"><a class="title" href="/2023/11/28/%E9%9D%A2%E8%AF%95%E7%9C%9F%E9%A2%98/2%E6%BB%B4%E6%BB%B4%E4%BB%A3%E7%A0%81%E9%A2%98/" title="滴滴代码题">滴滴代码题</a><time datetime="2023-11-28T00:57:09.000Z" title="发表于 2023-11-28 08:57:09">2023-11-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By Ni</div><div class="footer_custom_text">纵有疾风起,人生不言弃<p><a target="_blank" href="https://hexo.io/"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://github.com/"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="/js/sakura.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:24%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(images/bkg1.jpg);"> <a class="categoryBar-list-link" href="categories/dev/">dev</a><span class="categoryBar-list-count">6</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(images/bkg2.jpg);"> <a class="categoryBar-list-link" href="categories/algo/">algo</a><span class="categoryBar-list-count">75</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(images/bkg24.jpg);"> <a class="categoryBar-list-link" href="categories/dev/linux/">linux</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(images/bkg4.jpg);"> <a class="categoryBar-list-link" href="categories/interview/">interview</a><span class="categoryBar-list-count">17</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" href="categories/algo/算法总结/">算法总结</a><span class="categoryBar-list-count">10</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" href="categories/book/">book</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" href="categories/blockchain/">blockchain</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" href="categories/life/">life</a><span class="categoryBar-list-count">5</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" href="categories/algo/leetcode/">leetcode</a><span class="categoryBar-list-count">22</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" href="categories/面试真题/">面试真题</a><span class="categoryBar-list-count">23</span><span class="categoryBar-list-descr"></span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2022/11/15/dev/Redis集群化部署/" alt=""><img width="48" height="48" src="/images/bkg21.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-11-15</span><a class="blog-slider__title" href="2022/11/15/dev/Redis集群化部署/" alt="">Redis集群化部署</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2022/11/15/dev/Redis集群化部署/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2022/10/03/algoSummary/算法模板I题型归纳-并查集/" alt=""><img width="48" height="48" src="images/bkg23.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-10-03</span><a class="blog-slider__title" href="2022/10/03/algoSummary/算法模板I题型归纳-并查集/" alt="">算法模板I题型归纳-并查集</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2022/10/03/algoSummary/算法模板I题型归纳-并查集/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2022/08/28/life/初出茅庐-我的第一次实习经历/" alt=""><img width="48" height="48" src="images/bkg11.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-08-28</span><a class="blog-slider__title" href="2022/08/28/life/初出茅庐-我的第一次实习经历/" alt="">初出茅庐-我的第一次实习经历</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2022/08/28/life/初出茅庐-我的第一次实习经历/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2022/09/02/dev/开发-安全可靠登录流程的实现/" alt=""><img width="48" height="48" src="images/bkg17.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-09-02</span><a class="blog-slider__title" href="2022/09/02/dev/开发-安全可靠登录流程的实现/" alt="">开发-安全可靠登录流程的实现</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2022/09/02/dev/开发-安全可靠登录流程的实现/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --></body></html>
