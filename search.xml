@@ -443,9 +443,9 @@
       
         <tags>
             
-            <tag> 字节校招 </tag>
-            
             <tag> 面试真题 </tag>
+            
+            <tag> 字节校招 </tag>
             
             <tag> 腾讯校招 </tag>
             
@@ -2117,11 +2117,11 @@
     
     
     <entry>
-      <title>cvnotes</title>
-      <link href="/2023/03/26/CV/cvnotes/"/>
-      <url>/2023/03/26/CV/cvnotes/</url>
+      <title>yolo</title>
+      <link href="/2023/03/26/CV/yolo/"/>
+      <url>/2023/03/26/CV/yolo/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2><span id="目标检测">目标检测</span></h2><h3><span id="检测框生成">检测框生成</span></h3><ol><li>SS(Selective Search): 经典检测中用于生成检测框 较早RCNN中会用<ol><li>优势<ol><li>捕捉不同尺度</li><li>多样化</li><li>快速计算<br> 即SS 是用于目标检测的区域提议算法 计算速度快 具有很高的召回率 基于颜色、纹理、大小和形状兼容计算相似区域的分层分组</li></ol></li></ol></li><li>RPN: Faster Rcnn 使用的检测框生成算法 效率更高<br>RPN最终就是在原图尺度上，设置了密密麻麻的候选Anchor。然后用cnn去判断哪些Anchor是里面有目标的positive anchor，哪些是没目标的negative anchor。所以，仅仅是个二分类而已<ol><li>RPN包括以下部分:<ol><li>生成anchor boxes</li><li>判断每个anchor box为foregoroud(包含物体)或者background(背景) 二分类</li><li>边界框回归对anchor box进行微调 使得 positive anchor 和真实框(Ground Truth Box)更加接近</li></ol></li><li>anchor: <ol><li>感受野: 感受野也就是特征上的一个元素，对于输入图像的感受范围。 卷积层⬆ -&gt; 特征感受野↑</li><li>在最后一层中 特征的感受野一般都比较大 而且感受野一般都是正方形 -&gt; 网络收敛困难</li><li>在原始的输入图像上设置很多预设框 假定预设框是存在目标 然后一个一个的去对每一个预设框进行判断 是否存在目标 预设框是否和目标符合 -&gt; <ol><li>不存在目标 就在分类分支打低分 存在就打高分</li><li>如果预设框和目标相比偏了 那就需要调整预设框的偏移量 调整一下预设框的大小和中心位置 -&gt; 即回归分支计算损失<br>-&gt; 那个预设框即为 anchor<br>-&gt; 这一阶段输出的框即为 Anchor + 偏移量的结果</li></ol></li></ol></li></ol></li></ol><h3><span id="roi-pooling">ROI pooling</span></h3><p>在Fast-Rcnn中<br>RoI Pooling层则负责收集proposal，并计算出proposal feature maps，送入后续网络</p><ol><li>Rol pooling层有2个输入:<ol><li>原始的feature maps</li><li>RPN输出的proposal boxes（大小各不相同）</li><li></li></ol></li></ol><h2><span id="特征融合">特征融合</span></h2><pre><code>特征融合的目的 是把从图像中提取的特征 合并成一个比输入特征更具有判别能力的特征 因此如何正确进行融合特征就成了一个重要问题</code></pre><ol><li>早融合(early fusion) 和 晚融合(late fusion)<br>在很多工作中，融合不同尺度的特征是提高分割性能的一个重要手段。低层特征分辨率更高，包含更多位置、细节信息，但是由于经过的卷积更少，其语义性更低，噪声更多。高层特征具有更强的语义信息，但是分辨率很低，对细节的感知能力较差。如何将两者高效融合，取其长处，弃之糟泊，是改善分割模型的关键。<br>很多工作通过融合多层来提升检测和分割的性能，按照融合与预测的先后顺序，分类为早融合(Early fusion)和晚融合(Late fusion)。<ol><li>early fusion: 用经典的特征融合方法，在现有的网络中 用<strong>concat或add</strong>融合其中的某几层</li><li>lately fusion: <ol><li>采用类似**特征金字塔(FPN)**的思想 对特征融合后进行预测</li><li>feature不融合，多尺度的feture分别进行预测，然后对预测结果进行综合，如Single Shot MultiBox Detector (SSD) , Multi-scale CNN(MS-CNN)</li><li>用一个具有高低特征融合能力的网络替代普通的网络，如Densenet；</li><li>不进行高低层特征融合，而是在高层特征预测的基础上，再用底层特征进行预测结果的调整</li></ol></li></ol></li><li>concat 和 add<ol><li>concat: concat是通道数的增加 </li><li>add: add是特征图相加，通道数不变</li><li>两者有如下区别<ol><li>add是描述图像的特征下信息量增多了 但是描述图像的维度本身并没有增加 只是每一维下的信息量在增加 -&gt; 因此对与最终的图像分类是有益的</li><li>concat是通道数的合并 也就是说描述图像本身的特征数(通道数)增加了 而每一特征下的信息没有增加</li><li>concat每个通道对应着对应的卷积核 而add形式则将对应的特征图相加 再进行下一步卷积操作 再进行下一步卷积操作 -&gt; 相当于加了一个先验 (add等价于concat之后对应通道共享同一个卷积核)</li><li>add可以认为是特殊的concat形式 但是add的计算量要比concat的计算量小得多</li></ol></li></ol></li></ol><h3><span id="图像采样上下采样">图像采样(上下采样)</span></h3><ol><li>缩小图像 即 下采样&#x3D;&#x3D;降采样 主要目的如下<ol><li>使得图像符合显示区域的大小</li><li>生成对应图像的缩略图</li></ol></li><li>放大图像 即 上采样&#x3D;&#x3D;图像插值 主要目的下<ol><li>放大原图像 从而可以显示在更高分辨率的显示设备</li></ol></li></ol>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2><span id="yolov1">yolov1</span></h2>]]></content>
       
       
       
@@ -2130,11 +2130,11 @@
     
     
     <entry>
-      <title>yolo</title>
-      <link href="/2023/03/26/CV/yolo/"/>
-      <url>/2023/03/26/CV/yolo/</url>
+      <title>cvnotes</title>
+      <link href="/2023/03/26/CV/cvnotes/"/>
+      <url>/2023/03/26/CV/cvnotes/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2><span id="yolov1">yolov1</span></h2>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2><span id="目标检测">目标检测</span></h2><h3><span id="检测框生成">检测框生成</span></h3><ol><li>SS(Selective Search): 经典检测中用于生成检测框 较早RCNN中会用<ol><li>优势<ol><li>捕捉不同尺度</li><li>多样化</li><li>快速计算<br> 即SS 是用于目标检测的区域提议算法 计算速度快 具有很高的召回率 基于颜色、纹理、大小和形状兼容计算相似区域的分层分组</li></ol></li></ol></li><li>RPN: Faster Rcnn 使用的检测框生成算法 效率更高<br>RPN最终就是在原图尺度上，设置了密密麻麻的候选Anchor。然后用cnn去判断哪些Anchor是里面有目标的positive anchor，哪些是没目标的negative anchor。所以，仅仅是个二分类而已<ol><li>RPN包括以下部分:<ol><li>生成anchor boxes</li><li>判断每个anchor box为foregoroud(包含物体)或者background(背景) 二分类</li><li>边界框回归对anchor box进行微调 使得 positive anchor 和真实框(Ground Truth Box)更加接近</li></ol></li><li>anchor: <ol><li>感受野: 感受野也就是特征上的一个元素，对于输入图像的感受范围。 卷积层⬆ -&gt; 特征感受野↑</li><li>在最后一层中 特征的感受野一般都比较大 而且感受野一般都是正方形 -&gt; 网络收敛困难</li><li>在原始的输入图像上设置很多预设框 假定预设框是存在目标 然后一个一个的去对每一个预设框进行判断 是否存在目标 预设框是否和目标符合 -&gt; <ol><li>不存在目标 就在分类分支打低分 存在就打高分</li><li>如果预设框和目标相比偏了 那就需要调整预设框的偏移量 调整一下预设框的大小和中心位置 -&gt; 即回归分支计算损失<br>-&gt; 那个预设框即为 anchor<br>-&gt; 这一阶段输出的框即为 Anchor + 偏移量的结果</li></ol></li></ol></li></ol></li></ol><h3><span id="roi-pooling">ROI pooling</span></h3><p>在Fast-Rcnn中<br>RoI Pooling层则负责收集proposal，并计算出proposal feature maps，送入后续网络</p><ol><li>Rol pooling层有2个输入:<ol><li>原始的feature maps</li><li>RPN输出的proposal boxes（大小各不相同）</li><li></li></ol></li></ol><h2><span id="特征融合">特征融合</span></h2><pre><code>特征融合的目的 是把从图像中提取的特征 合并成一个比输入特征更具有判别能力的特征 因此如何正确进行融合特征就成了一个重要问题</code></pre><ol><li>早融合(early fusion) 和 晚融合(late fusion)<br>在很多工作中，融合不同尺度的特征是提高分割性能的一个重要手段。低层特征分辨率更高，包含更多位置、细节信息，但是由于经过的卷积更少，其语义性更低，噪声更多。高层特征具有更强的语义信息，但是分辨率很低，对细节的感知能力较差。如何将两者高效融合，取其长处，弃之糟泊，是改善分割模型的关键。<br>很多工作通过融合多层来提升检测和分割的性能，按照融合与预测的先后顺序，分类为早融合(Early fusion)和晚融合(Late fusion)。<ol><li>early fusion: 用经典的特征融合方法，在现有的网络中 用<strong>concat或add</strong>融合其中的某几层</li><li>lately fusion: <ol><li>采用类似**特征金字塔(FPN)**的思想 对特征融合后进行预测</li><li>feature不融合，多尺度的feture分别进行预测，然后对预测结果进行综合，如Single Shot MultiBox Detector (SSD) , Multi-scale CNN(MS-CNN)</li><li>用一个具有高低特征融合能力的网络替代普通的网络，如Densenet；</li><li>不进行高低层特征融合，而是在高层特征预测的基础上，再用底层特征进行预测结果的调整</li></ol></li></ol></li><li>concat 和 add<ol><li>concat: concat是通道数的增加 </li><li>add: add是特征图相加，通道数不变</li><li>两者有如下区别<ol><li>add是描述图像的特征下信息量增多了 但是描述图像的维度本身并没有增加 只是每一维下的信息量在增加 -&gt; 因此对与最终的图像分类是有益的</li><li>concat是通道数的合并 也就是说描述图像本身的特征数(通道数)增加了 而每一特征下的信息没有增加</li><li>concat每个通道对应着对应的卷积核 而add形式则将对应的特征图相加 再进行下一步卷积操作 再进行下一步卷积操作 -&gt; 相当于加了一个先验 (add等价于concat之后对应通道共享同一个卷积核)</li><li>add可以认为是特殊的concat形式 但是add的计算量要比concat的计算量小得多</li></ol></li></ol></li></ol><h3><span id="图像采样上下采样">图像采样(上下采样)</span></h3><ol><li>缩小图像 即 下采样&#x3D;&#x3D;降采样 主要目的如下<ol><li>使得图像符合显示区域的大小</li><li>生成对应图像的缩略图</li></ol></li><li>放大图像 即 上采样&#x3D;&#x3D;图像插值 主要目的下<ol><li>放大原图像 从而可以显示在更高分辨率的显示设备</li></ol></li></ol>]]></content>
       
       
       
